@@ -5,7 +5,7 @@ const Book = require('../models/Book')
 function list(req, res) {
     Book.find({}, (error, books) => {
         if(error) res.status(500).send(`Ha ocurrido un error al obtener los elementos: ${error}`)
-        res.send({data: books})
+        res.send(books)
     })
 }
 
@@ -21,7 +21,7 @@ function create(req, res) {
     book.save((error, bookSaved) => {
         if(error) return res.status(500).send(`Ha ocurrido un error al intentar guardar el elemento: ${error}`)
 
-        res.send({data: bookSaved})
+        res.send(bookSaved)
     })
 }
 
@@ -33,7 +33,7 @@ function get(req, res) {
 
         if(!book) return res.status(404).send('El libro no ha podido ser encontrado')
 
-        res.send({data: book})
+        res.send(book)
     })
 }
 
@@ -44,7 +44,7 @@ function update(req, res) {
     Book.findByIdAndUpdate(id, data, (error, book) => {
         if(error) return res.status(500).send('Ha ocurrido un error')
         
-        res.send({data: Object.assign(book, data)})
+        res.send(Object.assign(book, data))
     })
 }
 
